@@ -9,6 +9,33 @@
   <script defer src="script.js"></script>
 </head>
 <body>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+            width: 160px;
+        }
+        #room-container {
+            justify-content: center;
+            text-align: center;
+            text-size-adjust: 100;
+        }
+        #room-container div{
+            color: white;
+            background-color: black;
+            
+        }
+        #room-container a{
+            background-color: rgba(0, 0, 0, 0.027);
+        }
+        #submit-button {
+            width: 160px;
+        }
+        #room-text-field{
+            width: 160px;
+        }
+    </style>
   <div id="room-container">
     <% Object.keys(rooms).forEach(room => { %>
       <div><%= room %></div>
@@ -17,7 +44,8 @@
     
   </div>
   <form action="/room" method="POST">
-        <input name="room" type="text" required>
-        <button type="submit">New Room</button>
+        <input id="room-text-field" name="room" type="text" required>
+        <button id="submit-button" type="submit">New Room</button>
     </form>
+</body>
 </html>
