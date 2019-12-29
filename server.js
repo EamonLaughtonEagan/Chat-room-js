@@ -3,7 +3,7 @@ const http = require('http')
 const app = express()
 const server = http.Server(app)
 const io = require('socket.io')(server)
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORTnode || 8080
 
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -44,6 +44,7 @@ io.on('connection', socket => {
   })
   socket.on('send-chat-message', (room, message) => {
     socket.to(room).broadcast.emit('chat-message', { message: message, name: rooms[room].users[socket.id] })
+    
   })
   socket.on('disconnect', () => {
     getUserRooms(socket).forEach(room => {
@@ -55,7 +56,7 @@ io.on('connection', socket => {
 
 function getUserRooms(socket) {
     return Object.entries(rooms).reduce((names, [name, room]) => {
-        if (room.users[socket.id] != null) names.push(names)
-        return names
+      if (room.users[socket.id] != null) names.push(name)
+      return names
     }, [])
-}
+  }
